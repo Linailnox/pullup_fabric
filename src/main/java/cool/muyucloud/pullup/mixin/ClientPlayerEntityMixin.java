@@ -58,7 +58,7 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity implements Cl
     private final TreeMap<Identifier, Condition.ColoredText> hudTexts = new TreeMap<>();
 
     public ClientPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
-        super(world, pos, yaw, profile);
+        super(world, pos, yaw, profile,null);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -134,7 +134,7 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity implements Cl
             if (!condition.shouldLoopPlay()) {
                 if (trigger.lastPlay == -1) {
                     this.client.world.playSound(this.getX(), this.getY(), this.getZ(),
-                        SoundEvent.of(condition.getSound(), 0),
+                            new SoundEvent(condition.getSound()),
                             SoundCategory.VOICE, 1.0F, 1.0F, false);
                     trigger.lastPlay = this.ticks;
                 }
@@ -144,7 +144,7 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity implements Cl
             if (condition.getPlayDelay() < (this.ticks - trigger.lastPlay)) {
                 trigger.lastPlay = this.ticks;
                 this.client.world.playSound(this.getX(), this.getY(), this.getZ(),
-                    SoundEvent.of(condition.getSound(), 0),
+                        new SoundEvent(condition.getSound()),
                         SoundCategory.VOICE, 1.0F, 1.0F, false);
             }
         }

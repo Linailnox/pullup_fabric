@@ -34,7 +34,7 @@ public class ServerCommand {
     private static int enableSend(CommandContext<ServerCommandSource> context) {
         ServerCommandSource source = context.getSource();
         MutableText text = Text.translatable("command.pullup.server.enableSend");
-        source.sendFeedback(() -> text, true);
+        source.sendFeedback(text, true);
         CONFIG.set("sendServer", true);
         return 1;
     }
@@ -42,7 +42,7 @@ public class ServerCommand {
     private static int disableSend(CommandContext<ServerCommandSource> context) {
         ServerCommandSource source = context.getSource();
         MutableText text = Text.translatable("command.pullup.server.disableSend");
-        source.sendFeedback(() -> text, true);
+        source.sendFeedback(text, true);
         CONFIG.set("sendServer", false);
         return 1;
     }
@@ -63,12 +63,12 @@ public class ServerCommand {
 
     private static int loadSet(String name, ServerCommandSource source) {
         if (!ConditionLoader.containsFile(name)) {
-            source.sendFeedback(() -> Text.translatable("command.pullup.client.load.specific.notExist"), false);
+            source.sendFeedback( Text.translatable("command.pullup.client.load.specific.notExist"), false);
             return 0;
         }
 
         MutableText text = Text.translatable("command.pullup.client.load.specific.loading");
-        source.sendFeedback(() -> text, true);
+        source.sendFeedback(text, true);
         CONFIG.set("loadSet", name);
         if (CONFIG.getAsBool("sendServer")) {
             PullupNetworkS2C.sendClear(source.getPlayer());
@@ -79,7 +79,7 @@ public class ServerCommand {
 
     private static int loadDefault(ServerCommandSource source) {
         MutableText text = Text.translatable("command.pullup.client.load.default");
-        source.sendFeedback(() -> text, true);
+        source.sendFeedback(text, true);
         CONFIG.set("loadSet", "default");
         if (CONFIG.getAsBool("sendServer")) {
             PullupNetworkS2C.sendClear(source.getPlayer());
