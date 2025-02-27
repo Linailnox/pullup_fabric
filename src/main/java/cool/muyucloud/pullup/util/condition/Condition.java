@@ -48,7 +48,9 @@ public class Condition {
                     hudTextColor = new Color(color.has("red") ? color.get("red").getAsInt() : 0, color.has("green") ? color.get("green").getAsInt() : 0, color.has("blue") ? color.get("blue").getAsInt() : 0, color.has("alpha") ? color.get("alpha").getAsInt() : 255).getRGB();
                 }
                 this.hudText = new ColoredText(text, hudTextColor);
-            } else this.hudText = ColoredText.EMPTY;
+            } else {
+	            this.hudText = ColoredText.EMPTY;
+            }
         } else {
             this.hudText = ColoredText.EMPTY;
         }
@@ -110,7 +112,9 @@ public class Condition {
 
     public boolean verifyExpressions(ClientPlayerEntity player, World world) {
         for (Expression expression : this.expressions) {
-            if (computeExpression(player, world, expression) < 0) return false;
+            if (computeExpression(player, world, expression) < 0) {
+	            return false;
+            }
         }
         return true;
     }

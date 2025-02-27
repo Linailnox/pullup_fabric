@@ -121,10 +121,14 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity implements Cl
             ConditionTrigger trigger = this.conditionTriggers.get(id);
             final Condition.ColoredText hudText = condition.getHudText();
             if (!trigger.isTriggered) {
-                if (!hudText.isEmpty()) hudTexts.remove(id);
+                if (!hudText.isEmpty()) {
+	                hudTexts.remove(id);
+                }
                 continue;
             } else {
-                if (!hudText.isEmpty()) hudTexts.put(id, hudText);
+                if (!hudText.isEmpty()) {
+	                hudTexts.put(id, hudText);
+                }
             }
 
             if (!condition.shouldLoopPlay()) {

@@ -62,7 +62,9 @@ public class ConditionLoader {
 
         for (JsonElement element : array) {
             JsonObject object = element.isJsonObject() ? element.getAsJsonObject() : null;
-            if (object == null) return;
+            if (object == null) {
+	            return;
+            }
             Condition condition;
             try {
                 condition = new Condition(this.spaceName, object);
